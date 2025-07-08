@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ฟอร์มการแจ้งลา</title>
+
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      overflow: hidden;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+      padding: 40px 30px;
+      width: 90%;
+      max-width: 400px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .logo {
+      width: 120px;
+      margin: 0 auto 20px;
+      filter: drop-shadow(0 0 6px #00ffffa0);
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05) rotate(1deg);
+    }
+
+    h2 {
+      color: #00ffff;
+      margin-bottom: 30px;
+      text-shadow: 0 0 6px #00ffff;
+    }
+
+    label {
+      margin-top: 15px;
+      display: block;
+      font-weight: 500;
+      color: #aad;
+      text-align: left;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 1em;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 6px #00ffff;
+    }
+
+    input[type="submit"] {
+      background: #00ffff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    input[type="submit"]:hover {
+      background: #00cccc;
+      transform: scale(1.05);
+    }
+
+    ::placeholder {
+      color: #ccc;
+    }
+
+    .flatpickr-input {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <form class="form-container" id="leaveForm">
+    <!-- 🔥 โลโก้ -->
+    <img src="https://media.discordapp.net/attachments/1330250244327473254/1390987146780737627/42.png?ex=686ce43b&is=686b92bb&hm=2a3152dbce03ae65ec35e61054e63b8611fcaa57a751151aa7864ed61e5ec0f9&=&format=webp&quality=lossless&width=874&height=960" alt="Sirisakul Logo" class="logo">
+
+    <h2>ฟอร์มการแจ้งลา</h2>
+
+    <!-- Name -->
+    <label for="name">ชื่อ</label>
+    <input list="nameList" id="name" name="name" placeholder="พิมพ์หรือเลือกชื่อของคุณ" required>
+    <datalist id="nameList">
+      <option value="Prinx Rakkaimaipen">
+      <option value="Yuki Rakkaimaipen">
+      <option value="Dutchmill Rakkaimaipen">
+      <option value="Water Tranquillity">
+      <option value="Njamx Chokchon">
+      <option value="White Heaven">
+      <option value="Yuta Heaven">
+      <option value="Tunny Babyblossom">
+      <option value="Jes Torpedo">
+      <option value="Traffix Watdaimod">
+      <option value="Apollo Badhabits">
+      <option value="Whites Parkdum">
+      <option value="KImson Dianamo">
+      <option value="Jacob Heaven">
+      <option value="Bboat Heaven">
+      <option value="Escobar Xd">
+      <option value="Black Ros">
+    </datalist>
+
+    <!-- Start Date -->
+    <label for="start-date">วันที่เริ่มลา</label>
+    <input type="text" id="start-date" name="start-date" placeholder="เลือกหรือพิมพ์วันที่ เช่น 07/07/2025" required>
+
+    <!-- End Date -->
+    <label for="end-date">ถึงวันที่</label>
+    <input type="text" id="end-date" name="end-date" placeholder="เลือกหรือพิมพ์วันที่ เช่น 10/07/2025" required>
+
+    <!-- Reason -->
+    <label for="reason">เหตุผลในการลา</label>
+    <textarea id="reason" name="reason" rows="4" placeholder="กรอกเหตุผลในการลา" required></textarea>
+
+    <input type="submit" value="ส่งแบบฟอร์ม">
+  </form>
+
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+  <!-- Script สำหรับวันที่และแจ้งเตือน -->
+  <script>
+    flatpickr("#start-date", {
+      dateFormat: "d/m/Y",
+      allowInput: true
+    });
+
+    flatpickr("#end-date", {
+      dateFormat: "d/m/Y",
+      allowInput: true
+    });
+
+    // จัดการเมื่อกดส่งแบบฟอร์ม
+    document.getElementById("leaveForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // ป้องกันการโหลดหน้าใหม่
+
+      alert("ส่งแบบฟอร์มเรียบร้อยแล้ว ✅");
+
+      const refill = confirm("คุณต้องการกรอกแบบฟอร์มใหม่หรือไม่?");
+      if (refill) {
+        this.reset(); // รีเซ็ตค่าทั้งหมดในฟอร์ม
+      }
+    });
+  </script>
+
+</body>
+</html>
